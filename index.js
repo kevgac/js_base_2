@@ -116,3 +116,68 @@ function sommeJusqua(n){
 }
 console.log(sommeJusqua(5));
 
+
+console.log("-------------------");
+//décomposition d'un tableau
+const tab = [1,2,3,4,5];
+const tab2 = [1,2,3,4,5];
+
+const concatedTab = [...tab, ...tab2];
+
+const [a, b, ...reste] = tab;
+console.log(a);
+console.log(b);
+console.log(reste);
+console.log(concatedTab);
+
+console.log("-------------------");
+//décomposition d'un objet
+const tutu = {
+    name1 : "tutu",
+    prenom1 : "tutu",
+    age1 : 25,
+} 
+const {age1, ...reste2} = tutu;
+console.log(age1);
+console.log(reste2);
+
+
+console.log("-------------------");
+//décomposition d'une fonction
+function addition(...nums){
+    return nums.reduce((acc, num) => acc + num, 0);
+}
+console.log(addition(1,2,3,4,5,6,7,8,9,10));
+
+console.log("-------------------");
+//composition d'une fonction
+const doubler = x => x* 2;
+const ajouterTrois = x => x + 3;
+
+const composedFunc = x => ajouterTrois(doubler(x));
+console.log(composedFunc(5));
+
+console.log("-------------------");
+// currying
+/*
+
+curry(add2)(a)(b)(c)
+*/
+const add2 = (a, b, c) => a + b + c;
+
+//ES5
+const curry = fn => {
+    return function(a){
+        return function(b){
+            return function(c){
+                return fn(a,b,c);
+            }
+        }
+    }
+}
+
+//ES6
+const curryEs6 = fn => a => b => c => fn(a,b,c);
+
+const addCurryFied = curry(add2);
+console.log(addCurryFied(1)(2)(3));
